@@ -8,8 +8,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.BlockIterator;
@@ -24,11 +24,11 @@ public class TorchSnipe extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public void onEntityShoot(EntityShootBowEvent e) {
-        if (!(e.getProjectile() instanceof Arrow))
+    public void onProjectileLaunch(ProjectileLaunchEvent e) {
+        if (!(e.getEntity() instanceof Arrow))
             return;
 
-        arrows.put(e.getProjectile().getUniqueId(), new ShotArrow(e.getProjectile().getLocation(), e.getProjectile().getVelocity()));
+        arrows.put(e.getEntity().getUniqueId(), new ShotArrow(e.getEntity().getLocation(), e.getEntity().getVelocity()));
     }
 
     @EventHandler
